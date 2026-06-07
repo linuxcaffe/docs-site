@@ -28,7 +28,12 @@ jobs:
           fetch-depth: 0
 
       - name: Checkout notebook content
-        run: git clone --branch docs --depth 1 https://codeberg.org/linuxcaffe/nb-notes.git content
+        uses: actions/checkout@v4
+        with:
+          repository: linuxcaffe/docs
+          ref: docs
+          path: content
+          fetch-depth: 0
 
       - name: Setup Node
         uses: actions/setup-node@v4
