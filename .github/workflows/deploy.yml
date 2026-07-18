@@ -27,6 +27,15 @@ jobs:
         with:
           fetch-depth: 0
 
+      # Pulls from the GitHub mirror, not Codeberg (the notebook's canonical
+      # remote) directly -- a prior attempt to `git clone` straight from
+      # Codeberg (2026-06-06) was reverted because GHA runners couldn't
+      # reach it. This mirror doesn't go stale: the docs notebook's git
+      # remote has a dual pushurl (Codeberg + this repo), so every
+      # `nb sync`/notebook push updates both at once. If this ever starts
+      # building from stale content again, check that dual-pushurl config
+      # first (`git -C ~/.nb/docs remote -v`) before reintroducing a direct
+      # Codeberg checkout.
       - name: Checkout notebook content
         uses: actions/checkout@v4
         with:
