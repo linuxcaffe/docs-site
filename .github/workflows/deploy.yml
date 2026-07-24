@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout Quartz config
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
@@ -37,7 +37,7 @@ jobs:
       # first (`git -C ~/.nb/docs remote -v`) before reintroducing a direct
       # Codeberg checkout.
       - name: Checkout notebook content
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: linuxcaffe/docs
           ref: docs
@@ -45,7 +45,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: 22
 
@@ -53,7 +53,7 @@ jobs:
         run: npm ci
 
       - name: Cache optimized images
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         id: img-cache
         with:
           path: content/images
@@ -67,7 +67,7 @@ jobs:
         run: npx quartz build --directory content
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: public
 
@@ -80,4 +80,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
